@@ -27,7 +27,7 @@ pipeline {
                 sh '''
                     oc process -f kubefiles/security-scan-template.yml \
                     -n RHT_OCP4_DEV_USER-monitoring-lab \
-                    -p QUAY_USER=YOUR_QUAY_USER \
+                    -p QUAY_USER=gunnar-do \
                     -p QUAY_REPOSITORY=do400-monitoring-lab \
                     -p APP_NAME=calculator \
                     | oc replace --force \
@@ -35,7 +35,7 @@ pipeline {
                 '''
                 sh '''
                     ./scripts/check-job-state.sh "calculator-trivy" \
-                    "RHT_OCP4_DEV_USER-monitoring-lab"
+                    "ghilling-monitoring-lab"
                 '''
             }
         }
@@ -44,7 +44,7 @@ pipeline {
                 sh '''
                     ./scripts/redeploy.sh \
                         -d calculator \
-                        -n RHT_OCP4_DEV_USER-monitoring-lab
+                        -n ghilling-monitoring-lab
                 '''
             }
         }
