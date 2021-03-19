@@ -22,6 +22,15 @@ pipeline {
                 '''
             }
         }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    ./scripts/redeploy.sh \
+                        -d calculator \
+                        -n RHT_OCP4_DEV_USER-monitoring-lab
+                '''
+            }
+        }
     }
     post {
         failure {
